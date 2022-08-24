@@ -11,6 +11,7 @@
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
     "animate.css": "4.1.1",
+    "antd": "^4.22.7",
     "apexcharts": "3.35.0",
     "axios": "0.26.1",
     "bootstrap": "5.2.0-beta1",
@@ -38,6 +39,7 @@
     "react-topbar-progress-indicator": "4.1.1",
     "sass": "1.50.1",
     "socicon": "3.0.5",
+    "styled-components": "^5.3.5",
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11"
   },

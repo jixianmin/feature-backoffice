@@ -9,6 +9,7 @@ import { PrivateRoutes } from "./PrivateRoutes";
 import { ErrorsPage } from "../modules/errors/ErrorsPage";
 import { Logout, AuthPage, useAuth } from "../modules/auth";
 import { App } from "../App";
+import Auth from "../modules/auth2/Auth2";
 /**
  * Base URL of the website.
  *
@@ -30,7 +31,8 @@ const AppRoutes = () => {
             </>
           ) : (
             <>
-              <Route path="auth/*" element={<AuthPage />} />
+              {/* <Route path="auth/*" element={<AuthPage />} /> */}
+              <Route path="auth/*" element={<Auth />} />
               <Route path="*" element={<Navigate to="/auth" />} />
             </>
           )}

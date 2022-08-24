@@ -33,6 +33,7 @@ export function AsideMenuMain() {
         icon="/media/icons/duotune/communication/com006.svg"
         fontIcon="bi-person"
       >
+        <AsideMenuItem to="/usersprofile" title="회원정보" hasBullet={true} />
         <AsideMenuItem to="/users" title="회원리스트" hasBullet={true} />
       </AsideMenuItemWithSub>
 

@@ -4,6 +4,7 @@ import Dashboard from "../pages/dashboard/index";
 import Users from "../pages/user/index";
 import Reservation from "../pages/reservation/index";
 import Survey from "../pages/survey/index";
+import UsersProfile from "../pages/userprofile/index";
 
 const PrivateRoutes = () => {
   return (
@@ -16,6 +17,7 @@ const PrivateRoutes = () => {
         <Route path="users" element={<Users />} />
         <Route path="event/reservation" element={<Reservation />} />
         <Route path="event/survey" element={<Survey />} />
+        <Route path="usersprofile" element={<UsersProfile />} />
 
         {/* Page Not Found */}
         <Route path="*" element={<Navigate to="/error/404" />} />
