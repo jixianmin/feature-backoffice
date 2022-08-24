@@ -1,3 +1,18 @@
+# https://console.game.tiadev.net/user/list  /// 선임자분 페이지
+
+# james2@nsmg21.com       ////           1234            티아에서 운용중이신 관리자 페이지 사이트
+
+- 로그인 ( 회원가입 X ) ( 구현 방식은 자유롭게 )
+- admin layout
+- 회원정보 ( 상세 포함 )
+- 사전예약 ( 리스트 조회 및 통계 페이지 )
+- 반응형 ( 테이블 같은 경우 좌우 스크롤 )
+ui 템플릿, 차트 등 라이브러리는 자유롭게 사용해주시면 됩니다.
+
+# 개발하고 있는 P2E 내부 웹뷰 https://front.game.tiadev.net
+
+회원가입은 따로 없고 send code 하면 이메일로 가서 인증번호로 로그인 및 회원가입 되는 프로세스
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
