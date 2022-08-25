@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const AuthWrapper = styled.div`
   display: flex;
@@ -15,7 +15,7 @@ export const LeftImg = styled.div`
   height: 110px;
   bottom: 10%;
   left: 10%;
-  background-image: url('https://internal.game.tiadev.net/ranking/img/profile/lobby_profile%20character_Fox.png');
+  background-image: url("https://internal.game.tiadev.net/ranking/img/profile/lobby_profile%20character_Fox.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-position: center center;
@@ -27,7 +27,7 @@ export const RightImg = styled.div`
   height: 110px;
   bottom: 10%;
   right: 10%;
-  background-image: url('https://front.game.tiadev.net/_next/image?url=%2Fimg%2Fclosed-gold.png&w=256&q=75');
+  background-image: url("https://front.game.tiadev.net/_next/image?url=%2Fimg%2Fclosed-gold.png&w=256&q=75");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-position: center center;
@@ -44,7 +44,7 @@ export const AuthBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: url('https://front.game.tiadev.net/img/new/bg.png');
+  background-image: url("https://front.game.tiadev.net/img/new/bg.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-position: center center;
@@ -53,7 +53,7 @@ export const AuthBox = styled.div`
 export const AuthfirstBox = styled.div`
   width: 60%;
   height: 20%;
-  background-image: url('https://front.game.tiadev.net/img/img_title.png');
+  background-image: url("https://front.game.tiadev.net/img/img_title.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-position: center center;
@@ -62,7 +62,7 @@ export const AuthfirstBox = styled.div`
 export const AuthSecondBox = styled.div`
   width: 80%;
   height: 500px;
-  background-image: url('https://front.game.tiadev.net/img/img_faq.png');
+  background-image: url("https://front.game.tiadev.net/img/img_faq.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-position: center center;
@@ -82,7 +82,7 @@ export const AuthWarning = styled.div`
   width: 80%;
   height: 70px;
   color: white;
-  background-image: url('https://front.game.tiadev.net/img/img_submit.png');
+  background-image: url("https://front.game.tiadev.net/img/img_submit.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-position: center center;
@@ -118,7 +118,7 @@ export const AuthInput = styled.input`
 export const AuthSecondBoxButton = styled.div`
   width: 50%;
   height: 70px;
-  background-image: url('https://front.game.tiadev.net/img/img_submit.png');
+  background-image: url("https://front.game.tiadev.net/img/img_submit.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-position: center center;
@@ -130,4 +130,5 @@ export const AuthSecondBoxButton = styled.div`
   color: white;
   text-shadow: 1px 2px grey;
   padding-bottom: 10px;
+  cursor: pointer;
 `;

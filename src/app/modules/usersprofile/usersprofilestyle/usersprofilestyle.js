@@ -3,13 +3,15 @@ import styled from "styled-components";
 export const UsersProfileTitleText = styled.h1``;
 
 export const UsersProfileWrapper = styled.div`
-  display: flex;
-  justify-content: center;
   min-height: 100vh;
   width: 100%;
   margin: 0 auto;
   background-color: white;
   position: relative;
+  .ant-table-pagination-right {
+    display: flex;
+    justify-content: center;
+  }
 `;
 
 export const UsersProfileFindEditor = styled.div`
@@ -60,4 +62,12 @@ export const UsersProfileFindEditorSecondBox = styled.div`
   .ant-descriptions-row {
     border: solid 1px rgba(0, 0, 0, 0.06);
   }
+
+  .css-wc1354-ValueContainer {
+    height: 32px;
+  }
+`;
+
+export const UsersProfileFindEditorThirdBox = styled.div`
+  display: flex;
 `;
