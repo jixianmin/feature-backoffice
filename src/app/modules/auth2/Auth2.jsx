@@ -55,6 +55,7 @@ const Auth = () => {
             navigate("/dashboard");
           } else {
             alert("등록되지않은 회원입니다.");
+            saveAuth(undefined);
           }
         });
     } else {

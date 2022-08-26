@@ -12,6 +12,25 @@ export const UsersProfileWrapper = styled.div`
     display: flex;
     justify-content: center;
   }
+  .ant-table-wrapper {
+    width: 100%;
+    overflow: scroll;
+    /* 가로 스크롤 */
+    overflow: auto;
+    white-space: nowrap;
+    padding: none;
+    background-color: none;
+    ::-webkit-scrollbar-thumb {
+      background-color: balck;
+    }
+    scrollbar-width: auto;
+    ::-webkit-scrollbar {
+      height: 20px;
+    }
+  }
+  .ant-spin-nested-loading {
+    width: 2000px;
+  }
 `;
 
 export const UsersProfileFindEditor = styled.div`

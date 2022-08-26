@@ -15,3 +15,9 @@ export async function getUserPointApi(payload) {
 export async function getUserScoreApi(payload) {
   return await axios.get(url + "/user/score/list", { params: payload });
 }
+
+//회원정보
+
+export async function getUserProfile(payload) {
+  return await axios.get(url + "/user", { params: payload });
+}
