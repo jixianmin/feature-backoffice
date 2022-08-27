@@ -72,55 +72,93 @@ const columns = [
   },
 ];
 
-const getRandomuserParams = (params) => ({
-  results: params.pagination?.pageSize,
-  page: params.pagination?.current,
-  ...params,
-});
+// const getRandomuserParams = (params) => ({
+//   results: params.pagination?.pageSize,
+//   page: params.pagination?.current,
+//   ...params,
+// });
 
-const App = ({ buckets, currentPage }) => {
-  console.log(buckets);
+const UserProfileList = ({
+  buckets,
+  fetchData,
+  totalPage,
+  setBuckets,
+  filters,
+  setFilters,
+}) => {
   const [data, setData] = useState();
   const [loading, setLoading] = useState(false);
-  const [pagination, setPagination] = useState({
-    current: 1,
-    pageSize: 20,
-  });
+  // const [pagination, setPagination] = useState({
+  //   current: currentPage,
+  //   pageSize: 20,
+  // });
   ////////////////////
   //console.log(buckets);
   //////////////
-  const fetchData = (params = {}) => {
-    setLoading(true);
-    fetch(
-      `https://randomuser.me/api?${qs.stringify(getRandomuserParams(params))}`
-    )
-      .then((res) => res.json())
-      .then(({ results }) => {
-        console.log(results);
-        setData(results);
-        setLoading(false);
-        setPagination({
-          ...params.pagination,
-          total: 200, // 200 is mock data, you should read it from server
-          // total: data.totalCount,
-        });
+  // const fetchData = (params = {}) => {
+  //   setLoading(true);
+  //   fetch(
+  //     `https://randomuser.me/api?${qs.stringify(getRandomuserParams(params))}`
+  //   )
+  //     .then((res) => res.json())
+  //     .then(({ results }) => {
+  //       //console.log(results);
+  //       setData(results);
+  //       setLoading(false);
+  //       setPagination({
+  //         ...params.pagination,
+  //         total: 200, // 200 is mock data, you should read it from server
+  //         // total: data.totalCount,
+  //       });
+  //     });
+  // };
+
+  // useEffect(() => {
+  //   //console.log(pagination);{current: 1, pageSize: 20}
+  //   fetchData({
+  //     pagination,
+  //   });
+  // }, []);
+
+  // const handleTableChange = (newPagination, filters, sorter) => {
+  //   fetchData({
+  //     sortField: sorter.field,
+  //     sortOrder: sorter.order,
+  //     pagination: newPagination,
+  //     ...filters,
+  //   });
+  // };
+
+  // useEffect(() => {
+  //   fetchData({
+  //     pagination,
+  //   });
+  // }, []);
+
+  const onChange = (page) => {
+    // setPageSize(page.pageSize);
+    // setCurrentPage(page.currentPage);
+    // console.log(filters);
+    //const { pageSize, currentPage } = filters;
+    //console.log(filters.currentPage);
+    if (page.pageSize !== filters.perPage) {
+      setFilters({
+        ...filters,
+        perPage: page.pageSize,
+        //currentPage: page.current,
       });
-  };
-
-  useEffect(() => {
-    console.log(pagination);
-    fetchData({
-      pagination,
-    });
-  }, []);
-
-  const handleTableChange = (newPagination, filters, sorter) => {
-    fetchData({
-      sortField: sorter.field,
-      sortOrder: sorter.order,
-      pagination: newPagination,
-      ...filters,
-    });
+      console.log('가나다');
+      console.log(filters);
+      //fetchData();
+    } else if (page.current !== filters.page) {
+      setFilters({
+        ...filters,
+        page: page.current,
+      });
+      console.log('마바사');
+      console.log(filters);
+      //fetchData();
+    }
   };
 
   return (
@@ -129,11 +167,18 @@ const App = ({ buckets, currentPage }) => {
       rowKey={(record) => record.id}
       dataSource={buckets}
       //   pagination={pagination}
-      pagination={pagination}
+      pagination={{
+        total: totalPage,
+        defaultCurrent: 1,
+        pageSize: filters.perPage,
+        current: filters.page,
+        //onChange: { onChange },
+      }}
       loading={loading}
+      onChange={onChange}
       // onChange={handleTableChange}
     />
   );
 };
 
-export default App;
+export default UserProfileList;

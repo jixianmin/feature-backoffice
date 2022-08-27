@@ -40,25 +40,32 @@ const UsersProfile = () => {
     start_at: '',
     end_at: '',
     blind: '',
+    page: 1,
+    //pageLimit: 20,
+    perPage: 20,
+    pagination: 'Y',
   });
-  const [currentPage, setCurrentPage] = useState(1);
+  //const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
+  //const [pageSize, setPageSize] = useState(20);
 
   const [buckets, setBuckets] = useState([]);
 
   const fetchData = useCallback(async () => {
-    const payload = {
-      ...filters,
-      page: currentPage,
-      perPage: 20,
-      pagination: 'Y',
-    };
-
-    await getUserProfile(payload)
+    // const payload = {
+    //   ...filters,
+    //   // page: currentPage,
+    //   // perPage: pageSize,
+    //   pagination: 'Y',
+    // };
+    //console.log(payload);
+    //console.log(currentPage);
+    await getUserProfile(filters)
       .then(({ data }) => {
         if (data.success) {
           setBuckets(data.data.data);
           setTotalPage(data.data.total);
+          console.log(data);
         }
       })
       .catch((e) => {});
@@ -67,6 +74,10 @@ const UsersProfile = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, [filters]);
 
   return (
     <>
@@ -123,7 +134,14 @@ const UsersProfile = () => {
             </UsersProfileStyle.UsersProfileFindEditorFirstBoxRight>
           </UsersProfileStyle.UsersProfileFindEditorThirdBox>
         </UsersProfileStyle.UsersProfileFindEditor>
-        <UserProfileList buckets={buckets} currentPage={currentPage} />
+        <UserProfileList
+          buckets={buckets}
+          setBuckets={setBuckets}
+          fetchData={fetchData}
+          totalPage={totalPage}
+          filters={filters}
+          setFilters={setFilters}
+        />
       </UsersProfileStyle.UsersProfileWrapper>
     </>
   );
