@@ -1,34 +1,19 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import * as UsersProfileStyle from './usersprofilestyle/usersprofilestyle';
-import { Badge, Descriptions } from 'antd';
 import AdminSelect from './userprofilesearch/AdminSelect';
 import UserName from './userprofilesearch/UserName';
-import Block from './userprofilesearch/Block';
+import Nickname from './userprofilesearch/Nickname';
+import Email from './userprofilesearch/Email';
+import Hp from './userprofilesearch/Hp';
+import Code from './userprofilesearch/Code';
+import Blind from './userprofilesearch/Blind';
 import CountrySelector from './userprofilesearch/Countryselector';
 import DatePicker from './userprofilesearch/DatePicker';
 import UserProfileList from './userprofilelist/UserProfileList';
 import { getUserProfile } from 'src/api/user/get';
+import * as UsersProfileStyle from './usersprofilestyle/usersprofilestyle';
+import { Badge, Descriptions } from 'antd';
 
 const UsersProfile = () => {
-  // const token = localStorage.getItem('login-token') || '';
-  // // const token =
-  // //   "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI1IiwianRpIjoiMmVmNzdlNjBjMWE4YTg1NTdlZDgxNDBkNjMyNDhmOTEwNTI4ZGIyZWM2YjQ1ZWU0MjJkMjJlNTYzY2UyMDE5OTEzODlmMmQ5MzhlYWM5NjIiLCJpYXQiOiIxNjYxNDE0MzQ3LjgzMTA1OCIsIm5iZiI6IjE2NjE0MTQzNDcuODMxMDYxIiwiZXhwIjoiMTY2MTUwMDc0Ny44MjE3MDkiLCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.M9iq9XSukGh5Ee65IIKScMexbPpOj1C-gpuA_X_uiuiWQ4_09JYJp1nR48NSLSSWQcpZuvcFUUEZgD1R4enNlCpdYuaoEqkByQOvhmaMnmwDCwl38uNnrqsJWTHUgwVIrT9s29yq7OTts9uBtgnQvq-78Js3jLhX20-EFa0Y3VJdQGHX2lyDPY49gVsV24bLDwPcrObYZzFyNOZs7aFkSaziSug_DP4fgcd35F9zsN98PgIjZQJR8c26Cm6P5mOkGPgzAs75-eKHqqINs8kIJxkn6KA2pwqLfPC_A1tCsf_-ylrCqbr3iyw6t4HoofwTq_xiwpV3l0_Gd4AhzjGmlJS_T1mhGsGjpsi6iJdv8ojeHcY8F6DBDmVpoRw9BCTIgPJLXtEi6S7pQ23T3Q9E9qBBYbXdDpLabTCdNzpPm3FwljVpqncCQyj7PIE4XuJ6ssp8fvgE7wBs3gabZ32UrexsO7-MBJV_DxwNNJid5pmi-FfvC-05ia2NZXLIC_G914oonOf1grndBt50BH1Dvx8b9W80RLXsxP2_AgNzc1VmKCMOM-g_UFVjQ15IevQPVcmlw4VVld_riVgJDLQlGoTvKTSEp78ICcnJmB-sUbb5Jx6K6tjevPr5Ygiv8190BGOaDotROp_CKTAKoaNxODisD1zZWSRe1ULml2D8kok";
-  // useEffect(() => {
-  //   fetch(
-  //     'https://api.game.tiadev.net/api/user?page=1&pageLimit=10&pagination=Y&order=&nickname=bot&sort=',
-  //     {
-  //       method: 'Get',
-  //       headers: {
-  //         Authorization: 'Bearer ' + token,
-  //       },
-  //     }
-  //   )
-  //     .then((response) => response.json())
-  //     .then((result) => {
-  //       console.log(result);
-  //     });
-  // }, []);
-
   const [filters, setFilters] = useState({
     level: '',
     name: '',
@@ -45,27 +30,15 @@ const UsersProfile = () => {
     perPage: 20,
     pagination: 'Y',
   });
-  //const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
-  //const [pageSize, setPageSize] = useState(20);
-
   const [buckets, setBuckets] = useState([]);
 
   const fetchData = useCallback(async () => {
-    // const payload = {
-    //   ...filters,
-    //   // page: currentPage,
-    //   // perPage: pageSize,
-    //   pagination: 'Y',
-    // };
-    //console.log(payload);
-    //console.log(currentPage);
     await getUserProfile(filters)
       .then(({ data }) => {
         if (data.success) {
           setBuckets(data.data.data);
           setTotalPage(data.data.total);
-          console.log(data);
         }
       })
       .catch((e) => {});
@@ -77,7 +50,38 @@ const UsersProfile = () => {
 
   useEffect(() => {
     fetchData();
+    console.log(filters);
   }, [filters]);
+
+  const [descriptions, setDescriptions] = useState({});
+
+  const handleChangeDescriptions = () => {
+    setFilters({ ...filters, ...descriptions });
+  };
+
+  const [adminValue, setAdminValue] = useState('전체');
+  const [blindValue, setBlindValue] = useState('전체');
+  const [datePickerValue, setDatePickerValue] = useState(null);
+
+  const handleChangeDeleteDescriptions = () => {
+    setDescriptions({
+      ...descriptions,
+      start_at: '',
+      end_at: '',
+      level: '',
+      name: '',
+      nickname: '',
+      email: '',
+      hp: '',
+      code: '',
+      nation: '',
+      blind: '',
+    });
+    setFilters({ ...filters });
+    setAdminValue('전체');
+    setBlindValue('전체');
+    setDatePickerValue(null);
+  };
 
   return (
     <>
@@ -97,39 +101,73 @@ const UsersProfile = () => {
           <UsersProfileStyle.UsersProfileFindEditorSecondBox>
             <Descriptions bordered span={3}>
               <Descriptions.Item label='권한'>
-                <AdminSelect />
+                <AdminSelect
+                  descriptions={descriptions}
+                  setDescriptions={setDescriptions}
+                  adminValue={adminValue}
+                  setAdminValue={setAdminValue}
+                />
               </Descriptions.Item>
               <Descriptions.Item label='이름'>
-                <UserName />
+                <UserName
+                  descriptions={descriptions}
+                  setDescriptions={setDescriptions}
+                />
               </Descriptions.Item>
               <Descriptions.Item label='닉네임'>
-                <UserName />
+                <Nickname
+                  descriptions={descriptions}
+                  setDescriptions={setDescriptions}
+                />
               </Descriptions.Item>
               <Descriptions.Item label='이메일'>
-                <UserName />
+                <Email
+                  descriptions={descriptions}
+                  setDescriptions={setDescriptions}
+                />
               </Descriptions.Item>
               <Descriptions.Item label='전화번호'>
-                <UserName />
+                <Hp
+                  descriptions={descriptions}
+                  setDescriptions={setDescriptions}
+                />
               </Descriptions.Item>
               <Descriptions.Item label='추천코드'>
-                <UserName />
+                <Code
+                  descriptions={descriptions}
+                  setDescriptions={setDescriptions}
+                />
               </Descriptions.Item>
               <Descriptions.Item label='국가'>
                 <CountrySelector />
               </Descriptions.Item>
               <Descriptions.Item label='차단여부'>
-                <Block />
+                <Blind
+                  descriptions={descriptions}
+                  setDescriptions={setDescriptions}
+                  blindValue={blindValue}
+                  setBlindValue={setBlindValue}
+                />
               </Descriptions.Item>
               <Descriptions.Item label='가입일'>
-                <DatePicker />
+                <DatePicker
+                  descriptions={descriptions}
+                  setDescriptions={setDescriptions}
+                  datePickerValue={datePickerValue}
+                  setDatePickerValue={setDatePickerValue}
+                />
               </Descriptions.Item>
             </Descriptions>
           </UsersProfileStyle.UsersProfileFindEditorSecondBox>
           <UsersProfileStyle.UsersProfileFindEditorThirdBox>
-            <UsersProfileStyle.UsersProfileFindEditorFirstBoxRight>
+            <UsersProfileStyle.UsersProfileFindEditorFirstBoxRight
+              onClick={handleChangeDescriptions}
+            >
               조회
             </UsersProfileStyle.UsersProfileFindEditorFirstBoxRight>
-            <UsersProfileStyle.UsersProfileFindEditorFirstBoxRight>
+            <UsersProfileStyle.UsersProfileFindEditorFirstBoxRight
+              onClick={handleChangeDeleteDescriptions}
+            >
               초기화
             </UsersProfileStyle.UsersProfileFindEditorFirstBoxRight>
           </UsersProfileStyle.UsersProfileFindEditorThirdBox>

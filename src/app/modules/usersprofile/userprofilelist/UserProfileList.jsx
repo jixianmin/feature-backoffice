@@ -1,6 +1,7 @@
 import { Table } from 'antd';
 import qs from 'qs';
 import React, { useEffect, useState } from 'react';
+
 const columns = [
   {
     title: 'ID',
@@ -72,12 +73,6 @@ const columns = [
   },
 ];
 
-// const getRandomuserParams = (params) => ({
-//   results: params.pagination?.pageSize,
-//   page: params.pagination?.current,
-//   ...params,
-// });
-
 const UserProfileList = ({
   buckets,
   fetchData,
@@ -86,78 +81,37 @@ const UserProfileList = ({
   filters,
   setFilters,
 }) => {
+  const [idSort, setIdSort] = useState('');
   const [data, setData] = useState();
   const [loading, setLoading] = useState(false);
-  // const [pagination, setPagination] = useState({
-  //   current: currentPage,
-  //   pageSize: 20,
-  // });
-  ////////////////////
-  //console.log(buckets);
-  //////////////
-  // const fetchData = (params = {}) => {
-  //   setLoading(true);
-  //   fetch(
-  //     `https://randomuser.me/api?${qs.stringify(getRandomuserParams(params))}`
-  //   )
-  //     .then((res) => res.json())
-  //     .then(({ results }) => {
-  //       //console.log(results);
-  //       setData(results);
-  //       setLoading(false);
-  //       setPagination({
-  //         ...params.pagination,
-  //         total: 200, // 200 is mock data, you should read it from server
-  //         // total: data.totalCount,
-  //       });
-  //     });
-  // };
 
-  // useEffect(() => {
-  //   //console.log(pagination);{current: 1, pageSize: 20}
-  //   fetchData({
-  //     pagination,
-  //   });
-  // }, []);
-
-  // const handleTableChange = (newPagination, filters, sorter) => {
-  //   fetchData({
-  //     sortField: sorter.field,
-  //     sortOrder: sorter.order,
-  //     pagination: newPagination,
-  //     ...filters,
-  //   });
-  // };
-
-  // useEffect(() => {
-  //   fetchData({
-  //     pagination,
-  //   });
-  // }, []);
-
-  const onChange = (page) => {
-    // setPageSize(page.pageSize);
-    // setCurrentPage(page.currentPage);
-    // console.log(filters);
-    //const { pageSize, currentPage } = filters;
-    //console.log(filters.currentPage);
+  const onChange = (page, filter, sorter) => {
+    console.log('솔트', sorter);
     if (page.pageSize !== filters.perPage) {
-      setFilters({
+      return setFilters({
         ...filters,
         perPage: page.pageSize,
-        //currentPage: page.current,
       });
-      console.log('가나다');
-      console.log(filters);
-      //fetchData();
     } else if (page.current !== filters.page) {
-      setFilters({
+      return setFilters({
         ...filters,
         page: page.current,
       });
-      console.log('마바사');
-      console.log(filters);
-      //fetchData();
+    }
+    if (sorter) {
+      if (sorter.order === 'ascend') {
+        return setFilters({
+          ...filters,
+          order: sorter.field,
+          sort: 'asc',
+        });
+      } else if (sorter.order === 'descend') {
+        return setFilters({
+          ...filters,
+          order: sorter.field,
+          sort: 'desc',
+        });
+      }
     }
   };
 
@@ -166,17 +120,14 @@ const UserProfileList = ({
       columns={columns}
       rowKey={(record) => record.id}
       dataSource={buckets}
-      //   pagination={pagination}
       pagination={{
         total: totalPage,
         defaultCurrent: 1,
         pageSize: filters.perPage,
         current: filters.page,
-        //onChange: { onChange },
       }}
       loading={loading}
       onChange={onChange}
-      // onChange={handleTableChange}
     />
   );
 };

@@ -5,7 +5,7 @@ const UserName = ({ descriptions, setDescriptions }) => {
   const onChange = (e) => {
     setDescriptions({
       ...descriptions,
-      name: e.target.value,
+      hp: e.target.value,
     });
   };
   return (
@@ -14,7 +14,7 @@ const UserName = ({ descriptions, setDescriptions }) => {
         width: '100%',
       }}
       onChange={onChange}
-      value={descriptions.name}
+      value={descriptions.hp}
     />
   );
 };

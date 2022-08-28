@@ -1,10 +1,16 @@
-import EmptyPage from "src/app/modules/empty";
+import React from 'react';
+import PrereSerVation from 'src/app/modules/pre-reservation/Prereservation';
+//import EmptyPage from "src/app/modules/empty";
 
 const Reservation = () => {
   return (
     <>
-      <EmptyPage />
+      <PrereSerVation />
     </>
   );
 };
 export default Reservation;
+// const UserProfile = () => {
+//   return <UsersProfile />;
+// };
+// export default UserProfile;
