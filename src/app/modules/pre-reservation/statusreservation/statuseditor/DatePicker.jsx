@@ -1,6 +1,6 @@
-import { DatePicker, Space } from "antd";
-import React from "react";
-import moment from "moment";
+import { DatePicker, Space } from 'antd';
+import React from 'react';
+import moment from 'moment';
 const { RangePicker } = DatePicker;
 
 const App = ({
@@ -18,7 +18,7 @@ const App = ({
     });
   }
   return (
-    <Space direction="vertical" size={12}>
+    <Space direction='vertical' size={12}>
       <RangePicker
         onChange={onChange}
         value={datePickerValue}

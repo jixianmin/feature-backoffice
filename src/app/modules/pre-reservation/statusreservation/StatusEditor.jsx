@@ -1,8 +1,8 @@
-import { Descriptions } from "antd";
-import React from "react";
-import DatePicker from "./statuseditor/DatePicker";
-import TimeZone from "./statuseditor/TimeZone";
-import Channel from "./statuseditor/Channel";
+import { Descriptions } from 'antd';
+import React from 'react';
+import DatePicker from './statuseditor/DatePicker';
+import TimeZone from './statuseditor/TimeZone';
+import Channel from './statuseditor/Channel';
 
 const App = ({
   allBuckets,
@@ -10,12 +10,13 @@ const App = ({
   setDescriptions,
   datePickerValue,
   setDatePickerValue,
+  filters,
+  setFilters,
 }) => {
-  console.log(allBuckets);
   return (
     <div>
       <Descriptions
-        title="Responsive Descriptions"
+        title='Responsive Descriptions'
         bordered
         column={{
           xxl: 4,
@@ -26,19 +27,22 @@ const App = ({
           xs: 1,
         }}
       >
-        <Descriptions.Item label="사전신청 완료">
+        <Descriptions.Item label='사전신청 완료'>
           {allBuckets.ratio.completion_count}
         </Descriptions.Item>
-        <Descriptions.Item label="코드발송">
+        <Descriptions.Item label='코드발송'>
           {allBuckets.ratio.all_count}
         </Descriptions.Item>
-        <Descriptions.Item label="전환율">
+        <Descriptions.Item label='전환율'>
           {allBuckets.ratio.completion_per}
         </Descriptions.Item>
-        <Descriptions.Item label="타임존">
-          <TimeZone />
+        <Descriptions.Item label='타임존'>
+          <TimeZone
+            descriptions={descriptions}
+            setDescriptions={setDescriptions}
+          />
         </Descriptions.Item>
-        <Descriptions.Item label="시작/종료일">
+        <Descriptions.Item label='시작/종료일'>
           <DatePicker
             descriptions={descriptions}
             setDescriptions={setDescriptions}
@@ -46,10 +50,13 @@ const App = ({
             setDatePickerValue={setDatePickerValue}
           />
         </Descriptions.Item>
-        <Descriptions.Item label="채널">
-          <Channel />
+        <Descriptions.Item label='채널'>
+          <Channel
+            descriptions={descriptions}
+            setDescriptions={setDescriptions}
+          />
         </Descriptions.Item>
-        <Descriptions.Item label="합계">
+        <Descriptions.Item label='합계'>
           신청&ensp;:&ensp;
           {allBuckets.ratio.all_count}
           <br />
