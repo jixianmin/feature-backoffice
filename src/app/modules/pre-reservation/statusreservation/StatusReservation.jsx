@@ -1,99 +1,72 @@
-import { Table } from 'antd';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
+import StatusEcharts from "./StatusEcharts";
+import StatusEditor from "./StatusEditor";
+import * as PreReservationStyle from "../prereservationstyle/PreReservationStyle";
+import { Table } from "antd";
 
 const columns = [
   {
-    title: '날짜',
-    dataIndex: 'date',
-    width: '20%',
+    title: "날짜",
+    dataIndex: "date",
+    width: "20%",
   },
   {
-    title: '신청',
-    dataIndex: 'count',
-    width: '20%',
+    title: "신청",
+    dataIndex: "count",
+    width: "20%",
   },
   {
-    title: '완료',
-    dataIndex: 'completed',
-    width: '20%',
+    title: "완료",
+    dataIndex: "completed",
+    width: "20%",
   },
   {
-    title: '대기',
-    dataIndex: 'waiting',
-    width: '20%',
+    title: "대기",
+    dataIndex: "waiting",
+    width: "20%",
   },
   {
-    title: '전환율',
-    dataIndex: 'ratio',
-    width: '20%',
+    title: "전환율",
+    dataIndex: "ratio",
+    width: "20%",
   },
 ];
 
-const UserProfileList = ({ buckets }) => {
-  //   const [idSort, setIdSort] = useState('');
-  //   const [data, setData] = useState();
+const UserProfileList = ({
+  buckets,
+  allBuckets,
+  descriptions,
+  setDescriptions,
+  datePickerValue,
+  setDatePickerValue,
+}) => {
   const [loading, setLoading] = useState(false);
-
-  //   const onChange = (page, filter, sorter) => {
-  //     console.log('솔트', sorter);
-  //     if (page.pageSize !== filters.perPage) {
-  //       return setFilters({
-  //         ...filters,
-  //         perPage: page.pageSize,
-  //       });
-  //     } else if (page.current !== filters.page) {
-  //       return setFilters({
-  //         ...filters,
-  //         page: page.current,
-  //       });
-  //     }
-  //     if (sorter) {
-  //       if (sorter.order === 'ascend') {
-  //         return setFilters({
-  //           ...filters,
-  //           order: sorter.field,
-  //           sort: 'asc',
-  //         });
-  //       } else if (sorter.order === 'descend') {
-  //         return setFilters({
-  //           ...filters,
-  //           order: sorter.field,
-  //           sort: 'desc',
-  //         });
-  //       }
-  //     }
-  //   };
-
   return (
-    <Table
-      columns={columns}
-      rowKey={(record) => record.date}
-      dataSource={buckets}
-      //   pagination={{
-      //     total: totalPage,
-      //     defaultCurrent: 1,
-      //     pageSize: filters.perPage,
-      //     current: filters.page,
-      //   }}
-      loading={loading}
-      //onChange={onChange}
-      pagination={false}
-    />
+    <>
+      <StatusEcharts buckets={buckets} />
+      {allBuckets.length === 0 ? (
+        ""
+      ) : (
+        <StatusEditor
+          allBuckets={allBuckets}
+          descriptions={descriptions}
+          setDescriptions={setDescriptions}
+          datePickerValue={datePickerValue}
+          setDatePickerValue={setDatePickerValue}
+        />
+      )}
+      <PreReservationStyle.StatusEditorSearch>
+        조회
+      </PreReservationStyle.StatusEditorSearch>
+      <Table
+        columns={columns}
+        rowKey={(record) => record.date}
+        dataSource={buckets}
+        loading={loading}
+        pagination={false}
+      />
+    </>
   );
 };
 
 export default UserProfileList;
-// import { Input } from 'antd';
-// import React from 'react';
-
-// const UserName = () => {
-//   return (
-//     <Input
-//       style={{
-//         width: '100%',
-//       }}
-//     />
-//   );
-// };
-
-// export default UserName;
