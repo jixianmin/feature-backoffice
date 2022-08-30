@@ -35,10 +35,6 @@ const Page = ({ buckets, allBuckets }) => {
     },
   };
 
-  //console.log(allBuckets);
-  //console.log(allBuckets.daily_channel_user_count); //{push:Array(13), fb:Array(13)} 객체 리터럴(object)
-  //console.log(Array.isArray(allBuckets.daily_channel_user_count)); //boolean 맨처음 true 채널 넣으면 false
-  //  for...in문 사용하기
   const allBucketsForIn = () => {
     if (!Array.isArray(allBuckets.daily_channel_user_count)) {
       const allBucketscount = []; //['push', 'popup', 'fb']
@@ -52,7 +48,6 @@ const Page = ({ buckets, allBuckets }) => {
       }
 
       const bucketsdate = () => {
-        //(13)['','','','','']
         const arr = [];
         if (Array.isArray(allBucketData[allBucketscount[0]])) {
           allBucketData[allBucketscount[0]].map((res) => arr.push(res.date));
@@ -60,21 +55,13 @@ const Page = ({ buckets, allBuckets }) => {
         return arr;
       };
 
-      // const bucketscount = () => {
-      //   const arr = [];
-      //   if (Array.isArray(allBucketData[allBucketscount[0]])) {
-      //     allBucketData.res.map((result) => arr.push(result.completed));
-      //   }
-      //   return arr;
-      // };
-
       const seriesALLData = () => {
         const seriesData = [];
         allBucketscount.map((res) => {
           const bucketscount = () => {
             const arr = [];
             if (Array.isArray(allBucketData[allBucketscount[0]])) {
-              allBucketData.res.map((result) => arr.push(result.completed));
+              allBucketData[res].map((result) => arr.push(result.completed));
             }
             return arr;
           };
@@ -82,15 +69,13 @@ const Page = ({ buckets, allBuckets }) => {
             name: res,
             type: "line",
             stack: "Total",
-            data: bucketscount2(),
+            data: bucketscount(),
           });
-          //seriesData.push(allBucketData[res]);
         });
         return seriesData;
       };
 
-      return seriesALLData();
-      //allBuckets.daily_channel_user_count[allBucketscount[0]] === allBucketData[allBucketscount[0]]
+      //return seriesALLData(); //(2) [{…}, {…}]
       const makeoptions = {
         legend: {
           data: allBucketscount,
@@ -103,14 +88,7 @@ const Page = ({ buckets, allBuckets }) => {
         yAxis: {
           type: "value",
         },
-        series: [
-          {
-            name: "push",
-            type: "line",
-            stack: "Total",
-            data: bucketscount2(),
-          },
-        ],
+        series: seriesALLData(),
         tooltip: {
           trigger: "axis",
         },
@@ -118,8 +96,7 @@ const Page = ({ buckets, allBuckets }) => {
       return makeoptions;
     }
   };
-
-  console.log(allBucketsForIn());
+  //console.log(allBucketsForIn()); echarts 공식문서 notMerge={true}로 해결
 
   const bucketsdate2 = () => {
     const arr = [];
@@ -167,9 +144,9 @@ const Page = ({ buckets, allBuckets }) => {
   return (
     <>
       {Array.isArray(allBuckets.daily_channel_user_count) ? (
-        <ReactECharts option={options} /> //true
+        <ReactECharts option={options} notMerge={true} /> //true
       ) : (
-        <ReactECharts option={options2} /> //false
+        <ReactECharts option={allBucketsForIn()} notMerge={true} /> //false
       )}
     </>
   );
